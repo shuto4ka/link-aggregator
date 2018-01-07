@@ -1,33 +1,52 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.9.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 jar {
-	baseName = 'link-aggregator'
-	version = '0.0.1-SNAPSHOT'
+    baseName = 'link-aggregator'
+    version = '0.0.1-SNAPSHOT'
 }
-//group = 'my.own.linkaggregator'
-//version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+
+    compile "org.postgresql:postgresql:42.1.4"
+    compile "org.flywaydb:flyway-core:5.0.5"
+
+    compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '3.10.0'
+    compile group: 'com.graphql-java', name: 'graphiql-spring-boot-starter', version: '3.10.0'
+    compile group: 'com.graphql-java', name: 'graphql-java', version: '6.0'
+    compile group: 'com.graphql-java', name: 'graphql-java-tools', version: '4.3.0'
+    compile group: 'io.leangen.graphql', name: 'spqr', version: '0.9.5'
+
+
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+//    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.12.Final'
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+//    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.7.Final'
+
+
+    compile "org.projectlombok:lombok:1.16.18"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.testcontainers:testcontainers:1.5.1"
+
 }

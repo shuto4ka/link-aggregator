@@ -1,4 +1,4 @@
-package my.own.linkaggregator.backend;
+package my.own.linkaggregator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
