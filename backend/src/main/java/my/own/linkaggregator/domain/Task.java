@@ -1,6 +1,9 @@
 package my.own.linkaggregator.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "task")
+@Access(AccessType.FIELD)
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,6 +21,7 @@ public class Task {
     @Id
     @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
+    @Access(value = AccessType.PROPERTY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

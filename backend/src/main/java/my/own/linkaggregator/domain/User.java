@@ -1,5 +1,6 @@
 package my.own.linkaggregator.domain;
 
+import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -7,7 +8,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"user\"",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "username", name = "user_unique_username_idx")})
+@Access(AccessType.FIELD)
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,6 +21,7 @@ public class User {
     @Id
     @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+    @Access(value = AccessType.PROPERTY)
     private Long id;
 
     @Column(name = "username", nullable = false)
@@ -32,4 +36,10 @@ public class User {
     @OrderBy("id")
     private List<Task> tasks;
 
+
+    //Removing password from graph
+    @GraphQLQuery(name = "password")
+    public String getPasswordForGraphQL() {
+        return null;
+    }
 }
