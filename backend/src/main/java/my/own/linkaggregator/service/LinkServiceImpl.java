@@ -1,7 +1,6 @@
 package my.own.linkaggregator.service;
 
 import my.own.linkaggregator.domain.Link;
-import my.own.linkaggregator.domain.Task;
 import my.own.linkaggregator.repository.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +17,7 @@ public class LinkServiceImpl implements LinkService {
     }
 
     public Link get(Long linkId) {
-        return linkRepository.findOne(linkId);
+        return linkRepository.findById(linkId).orElse(null);
     }
 
     public Link add(Link link) {
@@ -34,6 +33,6 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public void delete(long linkId) {
-        linkRepository.delete(linkId);
+        linkRepository.deleteById(linkId);
     }
 }

@@ -2,9 +2,9 @@ package my.own.linkaggregator.domain;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
